@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+{% block title %}
+	Lista rezerwacji
+{% endblock title %}
+
+{% block content %}
+<div class="container has-background-link-light px-4 py-4">
+    {% if message %}
+        <p class="has-text-centered has-text-weight-bold is-size-5">{{ message }}</p>
+    {% else %}
+        {% if user.is_staff %}
+
+<form class="section" action="{% url 'bookings_list' %}" method="POST">
+{% csrf_token %}
+<div class="field is-horizontal">
+    <div class="field-body">
+        <div class="field">
+            <div class="control">
+                <label for="customer">Wybierz klienta:</label>
+                <div class="select is-info is-small is-rounded">
+                    <select name="user_id" id="customer">
+                        <option value="" selected disabled>Wybierz klienta</option>
+                        {% for customer in customers %}
+                            <option value="{{ customer.id }}">{{ customer.first_name }} {{ customer.last_name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="field">
+            <div class="control">
+                <label for="customer">Wybierz łódź:</label>
+                <div class="select is-info is-small is-rounded">
+                    <select name="boat_id" id="boat">
+                        <option value="" selected disabled>Wybierz łódź</option>
+                        {% for boat in boats %}
+                            <option value="{{ boat.id }}">{{ boat.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="field">
+            <div class="control">
+                <button class="button is-link is-small" type="submit">Filtruj</button>
+            </div>
+        </div>
+        <div class="field">
+            <div class="control">
+                <a class="button is-link is-small" href="{% url 'bookings_list' %}">Wyczyść filtr</a>
+            </div>
+        </div>
+        <div class="field">
+            <div class="control">
+                <a class="button is-link is-small" href="{% url 'export_bookings' %}">Export do xlsx</a>
+            </div>
+        </div>
+    </div>
+</div>
+</form>
+
+{% endif %}
+
+<div class="level-item has-text-centered">
+    <div class="table-container">
+        <table class="table is-fullwidth is-striped is-hoverable is-responsive">
+            <thead>
+                <tr>
+                    <th>Szczegóły rezerwacji</th>
+                    <th>Klient</th>
+                    <th>Kwota</th>
+                    <th>Status rezerwacji</th>
+                    <th>Zmiana statusu</th>
+                    <th>Edycja</th>
+                    <th>Anulacja</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for bookings in bookings_list %}
+                    <tr>
+                        {% if bookings.booking_confirm == False %}
+                            <td>Rezerwacja łodzi <strong>{{ bookings.boat_id.name }}</strong> w okresie<br> od {{ bookings.start_date |date:'Y-m-d'}} do {{ bookings.end_date |date:'Y-m-d'}} czeka na potwierdzenie.</td>
+                        {% else %}
+                            <td>Łódź <strong>{{ bookings.boat_id.name }}</strong> została zarezerwowana<br> w okresie od {{ bookings.start_date |date:'Y-m-d'}} do {{ bookings.end_date |date:'Y-m-d'}}.</td>
+                        {% endif %}
+                        <td>
+                            <a href="{% url 'customer_detail' bookings.customer_id.id %}">
+                            {{ bookings.customer_id.first_name }} {{ bookings.customer_id.last_name }}</a>
+                        </td>
+                        <td>{{ bookings.total_price }} zł</td>
+                        {% if bookings.booking_confirm == False %}
+                            <td class="has-text-danger">Niepotwierdzona</td>
+                        {% else %}
+                            <td class="has-text-success">Potwierdzona</td>
+                        {% endif %}
+                        {% if user.is_staff %}
+                            <td><a class="button is-link is-light" href ="{% url 'booking_status' bookings.id %}">Zmień status</a></td>
+                        {% endif %}
+                        <td><a class="button is-warning is-light" href="{% url 'booking_edit' bookings.id %}">Edytuj rezerwację</a></td>
+                        <td><a class="button is-danger is-light" href="{% url 'booking_cancel' bookings.id %}">Anuluj rezerwację</a></td>
+                    </tr>
+                {% endfor %}
+                <tr>
+                    <td></td>
+                    <td class="has-background-warning has-text-weight-bold">Suma:</td>
+                    {% if bookings_sum %}
+                        <td class="has-background-warning has-text-weight-bold">{{ bookings_sum }}zł</td>
+                    {% endif %}
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>
+{% endif %}
+</div>
+{% endblock content %}

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}
+	Szczegóły rezerwacji
+{% endblock title %}
+
+{% block content %}
+<div class="container has-background-link-light px-4 py-4">
+    <p class="is-size-4	my-3">
+        Łódź: {{ booking.boat_id.name }} <br>
+        Cena : {{booking.boat_id.daily_price}} zł/doba.
+    </p>
+    {% if error %}
+    	{{ error }}
+    {% endif %}
+
+    <form method="post" action="{% url 'booking_edit' booking.id %}">
+        {% csrf_token %}
+        <div class="control">
+            <label class="label" for="start_date">Data początkowa</label>
+            <input type="date" name="start_date" value="{{ booking.start_date|date:'Y-m-d' }}" required><br><br>
+        </div>
+        <div class="control">
+            <label class="label" for="end_date">Data końcowa:</label>
+            <input type="date" name="end_date" value="{{ booking.end_date|date:'Y-m-d' }}" required><br><br>
+        </div>
+        <div class="control">
+            <button class="button is-link" type="submit">Zapisz rezerwację</button>
+        </div>
+    </form>
+</div>
+{% endblock content %}

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+	Strona startowa
+{% endblock %}
+
+{% block content %}
+<div class="container has-background-link-light px-4 py-4">
+	<img src="{% static 'antilla.jpg' %}" alt="Antilla">
+<h1> Boatify </h1><br>
+<h3>Botify to system do zarządzania wynajmem jachtów żaglowych i motorowych.</h3>
+Został stworzony, aby pomóc w zarządzaniu firmą mojego znajomego.
+System jest dedykowany zarówno dla interfejsu klienta, jak i managera wypożyczalni. <br><br>
+
+<h3>Interfejs klienta:</h3>
+• Rejestracja konta <br>
+• Przeglądanie dostępne łodzie <br>
+• Składanie rezerwacji <br>
+• Edycja istniejącego zamówienia (np. przedłużenie okresu wynajmu) <br>
+• Dostęp do historii rezerwacji danego klienta <br><br>
+
+<h3>Interfejs menedżera:</h3>
+• Dodanie do oferty wynajmu łodzi z podziałem na żaglówki i motorówki <br>
+• Dodawanie marin, w których można odebrać łódź (adresy marin) <br>
+• Akceptacja rezerwacji łodzi <br>
+• Podsumowanie wszystkich rezerwacji klientów
+• Podsumowanie przychodów generowanych przez klientów indywidualnych/łodzie <br>
+• Eksport danych rezerwacji do pliku csv <br>
+• Automatyczne wysyłanie e-maila ze szczegółami rezerwacji do menadżera <br>
+• Automatyczne wysyłanie e-maila ze szczegółami rezerwacji do klienta <br><br>
+
+<h3><strong>Aby zalogować się do interfejsu menedżera, użyj poniższych danych uwierzytelniających:.</strong></h3>
+nazwa użytkownika: menager<br>
+hasło: menager<br>
+</div>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+	Rejestracja użytkownika
+{% endblock %}
+
+{% block content %}
+<div class="container has-background-link-light px-4 py-4">
+    <div class="columns">
+    <div class="column">
+    <p class="is-size-4	my-3">
+        Zarejestruj
+</p>
+
+    {% if password_errors %}
+    <h3>There is a problem with you password:</h3>
+        <ul>
+            {% for pass_err in password_errors %}
+            <li>{{pass_err}}</li>
+            {% endfor %}
+        </ul>
+
+    {% endif %}
+
+    {% if error %}
+        <h3>{{error}}</h3>
+    {% endif %}
+
+    <form action="" method="POST">
+        {% csrf_token %}
+            {{ user_form | crispy }}
+{#        {{ user_form.first_name }}#}
+{#        {{ user_form.last_name }}#}
+{#        {{ user_form.email.as_p }}#}
+{#        {{ user_form.username.as_p }}#}
+{#        {{ user_form.password1.as_p }}#}
+{#        {{ user_form.password2.as_p }}#}
+        <button class="button is-link" type="submit">Utwórz użytkownika</button>
+    </form>
+    </div>
+    <div class="column"></div>
+</div>
+{% endblock %}

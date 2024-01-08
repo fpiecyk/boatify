@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+	Logowanie
+{% endblock %}
+
+{% block content %}
+<div class="container has-background-link-light px-4 py-4">
+    <div class="columns">
+    <div class="column">
+        <form action="" method="POST">
+
+        {% csrf_token %}
+        {{ form | crispy}}
+        <button class="button is-link" type="submit">Zaloguj</button>
+        </form>
+    {% if error %}
+    	<h3>{{ error }}</h3>
+    {% endif %}
+    </div>
+    <div class="column"></div>
+</div>
+{% endblock %}

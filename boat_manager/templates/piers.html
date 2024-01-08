@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}
+	Lista przystani
+{% endblock title %}
+
+{% block content %}
+<div class="container has-background-link-light px-4 py-4">
+	<table class="table is-striped is-hoverable">
+    <thead>
+        <td class="content is-vcentered"><strong>Przystań</strong></td>
+        <td class="content is-vcentered"><strong>Adres</strong></td>
+        <td class="content is-vcentered"><strong>Edycja</strong></td>
+        <td class="content is-vcentered"><strong>Usuń</strong></td>
+    </thead>
+        {% for pier in piers %}
+        	<tr>
+                <td class="content is-vcentered">{{ pier.name }} </td>
+                <td class="content is-vcentered">{{ pier.address }} </td>
+                <td><a class="button is-warning is-light" href="{% url 'pier_edit' pier.id %}">Edytuj</a></td>
+                <td><a class="button is-danger is-light" href="{% url 'pier_delete' pier.id %}">Usuń</a></td>
+            </tr>
+        {% endfor %}
+
+    </table>
+</div>
+{% endblock content %}

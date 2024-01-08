@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}
+	Dane klienta
+{% endblock title %}
+
+{% block content %}
+<div class="container level has-background-link-light px-4 py-4">
+<div class="level-item has-text-centered">
+    <table class="table is-striped">
+        <tr>
+            <td>Imię:</td><td>{{ customer.first_name }}</td>
+        </tr>
+        <tr>
+            <td>Nazwisko:</td><td>{{ customer.last_name }}</td>
+        </tr>
+        <tr>
+            <td>Email:</td><td>{{ customer.email }}</td>
+        </tr>
+        <tr>
+            <td>Telefon:</td><td>{{ customer.phone }}</td>
+        </tr>
+        <tr>
+            <td>Suma wpłat:</td><td>{{ customer.wallet }} zł</td>
+        </tr>
+
+    </table>
+
+</div>
+</div>
+{% endblock content %}

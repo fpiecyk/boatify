@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+	Formularz dodawnia przystani
+{% endblock %}
+
+{% block content %}
+<div class="container has-background-link-light px-4 py-4">
+    <div class="columns">
+    <div class="column">
+        <form method="POST" action="">
+
+        {% csrf_token %}
+
+        {{ form | crispy }}
+        <button class="button is-link" type="submit">Zapisz</button>
+        </form>
+
+        {% if error %}
+            <h3>{{ error }}</h3>
+        {% endif %}
+    </div>
+    <div class="column"></div>
+    </div>
+</div>
+{% endblock content %}

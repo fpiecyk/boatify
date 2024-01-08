@@ -1,0 +1,46 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>
+        {% block title %}
+            Default
+        {% endblock title %}
+    </title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+
+</head>
+<body class="bg-img-2">
+<nav class="navbar has-background-link-light">
+    {% if not user.is_authenticated %}
+       <a class="navbar-item" href="{% url 'register' %}">Zarejstruj się</a>
+       <a class="navbar-item" href="{% url 'login_page' %}">Zaloguj się</a>
+    {% endif %}
+
+    {% if user.is_authenticated %}
+        <a class="navbar-item" href="{% url 'logut_page' %}">Wyloguj</a>
+        {% if not user.is_staff %}
+            <a class="navbar-item" href="{% url 'customer_bookins_list' %}">Wyświetl moje rezerwacje</a>
+        {% endif %}
+    {% endif %}
+{% if user.is_staff %}
+    <a class="navbar-item" href="{% url 'boat_create' %}">Dodaj łódź</a>
+    <a class="navbar-item" href="{% url 'pier_create' %}">Dodaj przystań</a>
+    <a class="navbar-item" href="{% url 'piers' %}">Lista przystani</a>
+    <a class="navbar-item" href="{% url 'bookings_list' %}">Wyświetl wszystkie rezerwacje</a>
+    <a class="navbar-item" href="{% url 'customer_list' %}">Wyświetl listę klientów</a>
+{% endif %}
+    <a class="navbar-item" href="{% url 'boats' %}">Oferta łodzi</a>
+
+</nav>
+{% block content %}
+
+{% endblock content %}
+
+</body>
+</html>

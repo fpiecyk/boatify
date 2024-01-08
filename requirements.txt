@@ -1,0 +1,16 @@
+asgiref==3.7.2
+crispy-bootstrap4==2023.1
+crispy-bulma==0.10.0
+distlib==0.3.6
+Django==4.2.6
+django-crispy-forms==2.1
+django-environ==0.11.2
+et-xmlfile==1.1.0
+filelock==3.11.0
+opencv-python==4.7.0.72
+openpyxl==3.1.2
+Pillow==10.1.0
+platformdirs==3.2.0
+pytz==2023.3.post1
+sqlparse==0.4.4
+tzdata==2023.3

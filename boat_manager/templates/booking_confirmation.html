@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}
+	Potwierdzenie rezerwacji
+{% endblock title %}
+
+{% block content %}
+<div class="container has-background-link-light px-4 py-4">
+    {% if message %}
+        <h3>{{ message }}</h3>
+    {% else %}
+    <p class="is-size-4	my-3">
+        Rezerwacja łodzi {{ booking.boat_id.name }} w okresie od {{ booking.start_date |date:'Y-m-d'}} do {{ booking.end_date |date:'Y-m-d'}} czeka na potwierdzenie.
+    </p>
+    {% endif %}
+
+</div>
+{% endblock content %}

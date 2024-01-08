@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block title %}
+	Szczegóły łodzi
+{% endblock title %}
+
+{% block content %}
+<div class="container has-background-link-light px-4 py-4">
+<div class="columns">
+    <div class="column has-text-centered">
+        <figure class="is-inline-block">
+            <img src="{{ boat_detail.image.url }}" alt="{{ boat_detail.name }}" width="600">
+        </figure>
+    </div>
+
+    <div class="column">
+        <table class="table is-striped is-narrow">
+            <tr>
+                <td>Nazwa:</td>
+                <td>{{ boat_detail.name }}</td>
+             </tr>
+            <tr>
+                <td>Typ:</td>
+                <td>{{ boat_detail.type }}</td>
+             </tr>
+            <tr>
+                <td>Długość:</td>
+                <td>{{ boat_detail.length }}</td>
+             </tr>
+            <tr>
+                <td>Liczba osób:</td>
+                <td>{{ boat_detail.capacity }}</td>
+            </tr>
+            <tr>
+                <td>Moc silnika:</td>
+                <td>{{ boat_detail.engine_power }}</td>
+            </tr>
+            <tr>
+                <td>Cena wynajmu:</td>
+                <td>{{ boat_detail.daily_price }} zł/doba</td>
+            </tr>
+        </table>
+        <div class="content mr-2 my-2 px-2 has-background-light	">
+            Opis: <br>
+            {{ boat_detail.description }}
+        </div>
+        <a class="button is-link mt-2" href="{% url 'booking_details' boat_detail.id %}">Zarezerwuj</a>
+    </div>
+</div>
+</div>
+{% endblock content %}

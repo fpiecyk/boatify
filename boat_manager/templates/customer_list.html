@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}
+	Lista rezerwacji
+{% endblock title %}
+
+{% block content %}
+<div class="container level has-background-link-light px-4 py-4">
+    <div class="level-item has-text-centered">
+        <div class="table-container">
+            <table class="table is-fullwidth is-striped is-hoverable is-responsive">
+                <thead>
+                    <th><strong>Imię</strong></th>
+                    <th><strong>Nazwisko</strong></th>
+                    <th><strong>Email</strong></th>
+                    <th><strong>Telefon komórkowy</strong></th>
+                    <th><strong>Kwota rezerwacji</strong></th>
+                </thead>
+                {% for customer in customers %}
+                    {% if not customer.is_superuser %}
+                        <tr>
+                            <td>{{ customer.first_name }}</td>
+                            <td>{{ customer.last_name }}</td>
+                            <td>{{ customer.email }}</td>
+                            <td>{{ customer.phone }}</td>
+                            <td>{{ customer.wallet }} zł</td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock content %}

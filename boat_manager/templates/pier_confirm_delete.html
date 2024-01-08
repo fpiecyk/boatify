@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container has-background-link-light px-4 py-4">
+    <p class="has-text-weight-bold is-size-5">Czy na pewno chcesz usunąć?</p>
+    <form method="post" action="{% url 'pier_delete' pier.id %}">
+        {% csrf_token %}
+        <input class="button is-link my-2" type="submit" value="Usuń">
+        <a class="button is-link my-2" href="{% url 'piers' %}">Cofnij</a>
+    </form>
+</div>
+{% endblock %}
